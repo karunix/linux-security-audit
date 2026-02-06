@@ -4,7 +4,16 @@ from audit.checks import (
     check_password_authentication,
     check_sudo_nopasswd,
 )
-from audit.models import Severity
+from audit.utils import exit_code_from_findings
+
+
+    if Severity.HIGH in severities:
+        return 3
+    if Severity.MEDIUM in severities:
+        return 2
+    if Severity.LOW in severities:
+        return 1
+    return 0
 import json
 import sys
 from audit.models import finding_to_dict
@@ -56,3 +65,4 @@ if __name__ == "__main__":
         print(json.dumps([finding_to_dict(f) for f in results], indent=2))
     else:
         print_report(results)
+    sys.exit(exit_code_from_findings(results))
