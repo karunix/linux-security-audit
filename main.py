@@ -5,6 +5,9 @@ from audit.checks import (
     check_sudo_nopasswd,
 )
 from audit.models import Severity
+import json
+import sys
+from audit.models import finding_to_dict
 
 
 def run_audit():
@@ -48,4 +51,8 @@ def print_report(findings):
 
 if __name__ == "__main__":
     results = run_audit()
-    print_report(results)
+
+    if "--json" in sys.argv:
+        print(json.dumps([finding_to_dict(f) for f in results], indent=2))
+    else:
+        print_report(results)

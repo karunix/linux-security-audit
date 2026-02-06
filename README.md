@@ -82,5 +82,13 @@ Each check produces a structured *Finding* consisting of:
                             serving as a foundation for more advanced audit features
                             
                             It is not intended to replace full compliance scanners or penetration testing tools.
+                            ## Output formats
+                            
+                            By default, the audit prints a human-readable report:
+                                
+                                ```bash
+                                python main.py
+    python main.py --json
+    python main.py --json > audit.json
                             
                             

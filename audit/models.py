@@ -16,3 +16,9 @@ class Finding:
     severity: Severity
     explanation: str
     recommendation: str
+    from dataclasses import asdict
+
+def finding_to_dict(finding):
+    data = asdict(finding)
+    data["severity"] = finding.severity.value
+    return data

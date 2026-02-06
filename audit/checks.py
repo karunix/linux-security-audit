@@ -200,3 +200,5 @@ def check_sudo_nopasswd() -> list[Finding]:
         )
 
     return findings
+
+

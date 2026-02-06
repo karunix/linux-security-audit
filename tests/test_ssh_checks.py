@@ -23,3 +23,17 @@ Port 22
 
     assert finding.severity == Severity.MEDIUM
     assert "PermitRootLogin" in finding.observation
+
+
+def test_permit_root_login_disabled(tmp_path):
+    sshd_config = tmp_path / "sshd_config"
+    sshd_config.write_text(
+        """
+        PermitRootLogin no
+        """
+    )
+
+    findings = check_permit_root_login(sshd_config)
+
+    assert len(findings) == 1
+    assert findings[0].severity == Severity.INFO
